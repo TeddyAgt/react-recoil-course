@@ -26,7 +26,7 @@ function AddTodo() {
   }
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center mb-4">
       <input
         onChange={handleOnChange}
         value={inputValue}
