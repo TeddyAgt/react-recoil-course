@@ -1,5 +1,6 @@
 import AddTodo from "./components/AddTodo";
 import FilterTodo from "./components/FilterTodo";
+import TodoData from "./components/TodoData";
 import TodoList from "./components/TodoList";
 
 function App() {
@@ -11,10 +12,13 @@ function App() {
           <FilterTodo />
         </div>
       </header>
-      <main className="bg-white p-4 shadow-md w-full rounded">
+      <section className="bg-white p-4 shadow-md w-full rounded mb-2">
+        <TodoData />
+      </section>
+      <section className="bg-white p-4 shadow-md w-full rounded mb-2">
         <AddTodo />
         <TodoList />
-      </main>
+      </section>
     </>
   );
 }

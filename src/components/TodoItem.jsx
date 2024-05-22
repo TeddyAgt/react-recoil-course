@@ -2,7 +2,7 @@ import { useSetRecoilState } from "recoil";
 import { todoState } from "../recoil";
 import { useState } from "react";
 
-function TodoItem({ todo }) {
+function TodoItem({ todo, onClick }) {
   const setTodosState = useSetRecoilState(todoState);
   const [inputValue, setInputValue] = useState(todo.content);
 
@@ -64,8 +64,13 @@ function TodoItem({ todo }) {
           </button>
           <button
             onClick={handleClickDelete}
-            className="p-1 text-white rounded shadow-sm bg-red-500">
+            className="p-1 text-white rounded shadow-sm bg-red-500 mr-2">
             Delete
+          </button>
+          <button
+            onClick={onClick}
+            className="p-1 text-white rounded shadow-sm bg-sky-500 mr-2">
+            Details
           </button>
         </>
       )}
