@@ -1,20 +1,26 @@
 import { useSetRecoilState } from "recoil";
 import { todoState } from "../recoil";
 import { useState } from "react";
+import {
+  updateTodo as updateTodoOnServer,
+  deleteTodo as deleteTodoOnServer,
+} from "../api";
 
 function TodoItem({ todo, onClick }) {
   const setTodosState = useSetRecoilState(todoState);
   const [inputValue, setInputValue] = useState(todo.content);
 
-  function handleClickDelete() {
+  async function handleClickDelete() {
+    await deleteTodoOnServer(todo._id);
     setTodosState((oldTotosState) =>
       oldTotosState.filter((ot) => ot._id !== todo._id)
     );
   }
 
-  function handleEditTodo(editedTodo) {
+  async function handleEditTodo(editedTodo) {
+    const updatedTodo = await updateTodoOnServer(editedTodo);
     setTodosState((oldTodosState) =>
-      oldTodosState.map((ot) => (ot._id === editedTodo._id ? editedTodo : ot))
+      oldTodosState.map((ot) => (ot._id === updatedTodo._id ? updatedTodo : ot))
     );
   }
 

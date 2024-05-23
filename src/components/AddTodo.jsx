@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { todoState } from "../recoil";
+import { createTodo } from "../api";
 
 function AddTodo() {
   const [inputValue, setInputValue] = useState("");
@@ -10,17 +11,14 @@ function AddTodo() {
     setInputValue(e.target.value);
   }
 
-  function handleClick() {
+  async function handleClick() {
+    const newTodo = await createTodo({
+      content: inputValue,
+      done: false,
+      edit: false,
+    });
     setTodosState((oldTodosState) => {
-      return [
-        ...oldTodosState,
-        {
-          _id: crypto.randomUUID(),
-          content: inputValue,
-          done: false,
-          edit: false,
-        },
-      ];
+      return [...oldTodosState, newTodo];
     });
     setInputValue("");
   }

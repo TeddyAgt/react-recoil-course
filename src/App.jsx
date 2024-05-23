@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import AddTodo from "./components/AddTodo";
 import FilterTodo from "./components/FilterTodo";
 import TodoData from "./components/TodoData";
@@ -12,13 +13,15 @@ function App() {
           <FilterTodo />
         </div>
       </header>
-      <section className="bg-white p-4 shadow-md w-full rounded mb-2">
-        <TodoData />
-      </section>
-      <section className="bg-white p-4 shadow-md w-full rounded mb-2">
-        <AddTodo />
-        <TodoList />
-      </section>
+      <Suspense>
+        <section className="bg-white p-4 shadow-md w-full rounded mb-2">
+          <TodoData />
+        </section>
+        <section className="bg-white p-4 shadow-md w-full rounded mb-2">
+          <AddTodo />
+          <TodoList />
+        </section>
+      </Suspense>
     </>
   );
 }

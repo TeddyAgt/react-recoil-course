@@ -1,8 +1,10 @@
 import { atom, selector, selectorFamily } from "recoil";
+import { getAllTodos, getOneTodo } from "../api";
 
 export const todoState = atom({
   key: "todoState",
-  default: [],
+  default: getAllTodos(),
+  effects: [],
 });
 
 export const filterState = atom({
@@ -51,8 +53,7 @@ export const selectTodoDetails = selectorFamily({
   key: "selectTodoDetails",
   get:
     (_id) =>
-    ({ get }) => {
-      const todos = get(todoState);
-      return _id ? todos.find((todo) => todo._id === _id) : null;
+    async ({ get }) => {
+      return _id && getOneTodo(_id);
     },
 });
